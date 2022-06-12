@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
 
-import sys;
-import signal;
+import sys
+import signal
+import argparse
 
 def sigint_handler(signal, frame):
     print("Keyboard Interrupt")
     sys.exit(0)
 
 def main():
+    parser = argparse.ArgumentParser(
+            description="""Estimate task log times by percentage, sum of all tasks percentage must be 100.
+            All percentage must divisible by 5"""
+    )
+
+    parser.add_argument("integers", metavar="N", type=int, nargs="?", help="number of total tasks")
+
     MAX_HOUR = 8
     sum_percent = 0
     sum_minute = 0
@@ -16,12 +24,14 @@ def main():
     input_percent = []
 
     total_tasks = 0
-    should_prompt_total_task = len(sys.argv) < 2
+    args = parser.parse_args()
+
+    should_prompt_total_task = (args.integers == None)
 
     if should_prompt_total_task:
         total_tasks = int(input("Enter total task : "))
     else:
-        total_tasks = int(sys.argv[1])
+        total_tasks = args.integers
 
     for i in range(0, total_tasks):
         percent = 0
