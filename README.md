@@ -14,6 +14,7 @@ This helper converts a task percentage to work hours in "hour:minute:seconds" fo
 
 # Note
 - All percentage must be divisible by 5 to avoid data loss when convert from percentage to actual work hours.
+- Sum of percentage in all tasks must be 100%.
 
 # Dependencies
 - python3
